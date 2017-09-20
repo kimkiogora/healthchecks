@@ -201,8 +201,9 @@ Solution is to do the following,
 
 * sudo apt --fix-broken install
 * sudo apt install python3-dev postgresql postgresql-contrib python3-psycopg2 libpq-dev
-* And after activating the virtual envihronment , pip install -r healthchecks/requirements.txt
+* And after activating the virtual environment 
+	* pip install -r healthchecks/requirements.txt
 * In case you are trying to use healthchecks with MySQL,
-  sudo apt-get install libmysqlclient-dev
-  ./hc-venv/bin/pip install mysqlclient (mysqlclient is a port of MySQL-python that supports python3+)
+	* sudo apt-get install libmysqlclient-dev
+  	* ./hc-venv/bin/pip install mysqlclient (mysqlclient is a port of MySQL-python that supports python3+)
 

@@ -194,3 +194,15 @@ To enable Pushover integration, you will need to:
   subscription type
 * add the application token and subscription URL to `hc/local_settings.py`, as
   `PUSHOVER_API_TOKEN` and `PUSHOVER_SUBSCRIPTION_URL`
+
+## Just in case of installation Issues ( Ubuntu Linux 17.04 )
+
+Solution is to do the following,
+
+* sudo apt --fix-broken install
+* sudo apt install python3-dev postgresql postgresql-contrib python3-psycopg2 libpq-dev
+* And after activating the virtual envihronment , pip install -r healthchecks/requirements.txt
+* In case you are trying to use healthchecks with MySQL,
+  sudo apt-get install libmysqlclient-dev
+  ./hc-venv/bin/pip install mysqlclient (mysqlclient is a port of MySQL-python that supports python3+)
+

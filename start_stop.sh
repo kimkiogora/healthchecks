@@ -2,9 +2,9 @@
 # Author Kim kiogora
 # 2017 Sep 20th
 DAEMON="manage.py"
-DAEMONPATH="/home/krypton/Desktop/projects/andela/pulls/healthchecks"
+DAEMONPATH=`pwd`
 PIDFILE="/var/run/hc-system.pid"
-VENV_FOLDER="/home/krypton/Desktop/projects/andela/hc-venv/bin/activate"
+VENV_FOLDER="../../hc-venv/bin/activate"
 
 isroot(){
 	if ! [ $(id -u) = 0 ]; then
@@ -24,7 +24,6 @@ start(){
 	else
 		source $VENV_FOLDER
 		cd $DAEMONPATH
-		#nohup $DAEMON runserver &
 		nohup python $DAEMON runserver >/dev/null 2>&1 &
 		pid=`ps aux | grep $DAEMON | grep -v "grep"| awk '{print $2}'`
 		echo $pid > $PIDFILE &

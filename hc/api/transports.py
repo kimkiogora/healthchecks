@@ -229,14 +229,14 @@ class SMS(HttpTransport):
         if not matches:
             return "Invalid Mobile Number"
 
-        url = "https://www.kweli-group.com/KweliSMS/index.php?/api/sendMessage"
+        url = ""
         headers = {
             "Conent-Type": "application/json"
         }
-        credentials = {"APIKey":"7cdcd9db6e16d95089380ed8118d4f53"}
+        credentials = {"APIKey":""}
         packet ={
                     "message":"HealthChecks SMS alert %s current status %s" % (check.name_then_code(), check.status),
-                    "receipients": [self.channel.value], #["254711240985"],
+                    "receipients": [self.channel.value],
                     "sendtime": None,
                     "callback": None
                 }

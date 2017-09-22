@@ -3,6 +3,7 @@ from django.template.loader import render_to_string
 from django.utils import timezone
 import json
 import requests
+import re
 from six.moves.urllib.parse import quote
 
 from hc.lib import emails
@@ -216,3 +217,30 @@ class VictorOps(HttpTransport):
         }
 
         return self.post(self.channel.value, payload)
+
+'''
+Added by Kim Kiogora <kimkiogora@gmail.com>
+'''
+class SMS(HttpTransport):
+    def notify(self, check):
+        mobile_no = self.channel.value
+        regex = r"^(?:(?:\+|0{0,2})254(\s*[\-]\s*)?|[0]?)?[7]\d{8}$"
+        matches = re.match(regex, mobile_no)
+        if not matches:
+            return "Invalid Mobile Number"
+
+        url = "https://www.kweli-group.com/KweliSMS/index.php?/api/sendMessage"
+        headers = {
+            "Conent-Type": "application/json"
+        }
+        credentials = {"APIKey":"7cdcd9db6e16d95089380ed8118d4f53"}
+        packet ={
+                    "message":"HealthChecks SMS alert %s current status %s" % (check.name_then_code(), check.status),
+                    "receipients": [self.channel.value], #["254711240985"],
+                    "sendtime": None,
+                    "callback": None
+                }
+        payload = {"credentials": credentials,"packet": packet}
+        requests.post(url=url, data=json.dumps(payload), headers=headers)
+        return ""
+        #self.post(url, json.dumps(payload), headers=headers)
